@@ -15,7 +15,10 @@ const CategoryBar = ({ categories, order, handleOrderChange }) => (
       {categories &&
         categories.length > 0 &&
         categories.map((category, i) => (
-          <Link to={category.path} key={i} style={{ textDecoration: 'none' }}>
+          <Link
+            to={category.path}
+            key={i}
+            style={{ textDecoration: 'none' }}>
             <Button color="contrast">{category.name}</Button>
           </Link>
         ))}
@@ -24,8 +27,7 @@ const CategoryBar = ({ categories, order, handleOrderChange }) => (
           style={{ color: 'white' }}
           value={order}
           onChange={handleOrderChange}
-          input={<Input id="order-tag" />}
-        >
+          input={<Input id="order-tag" /> } >
           <MenuItem value={VOTE_ORDER}>Vote Score</MenuItem>
           <MenuItem value={TIMESTAMP_ORDER}>Time</MenuItem>
         </Select>

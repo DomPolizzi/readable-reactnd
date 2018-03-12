@@ -35,27 +35,26 @@ function getData (token) {
 
 function getByParent (token, parentId) {
   return new Promise((res) => {
-    let comments = getData(token)
-    let keys = Object.keys(comments)
-    filtered_keys = keys.filter(key => comments[key].parentId === parentId && !comments[key].deleted)
-    res(filtered_keys.map(key => comments[key]))
-  })
+    let comments = getData(token);
+    let keys = Object.keys(comments);
+    filtered_keys = keys.filter(
+      key => comments[key].parentId === parentId && !comments[key].deleted);
+    res(filtered_keys.map(key => comments[key]));
+  });
 }
 
 function get (token, id) {
   return new Promise((res) => {
     const comments = getData(token)
-    res(
-      comments[id].deleted || comments[id].parentDeleted
-        ? {}
+    res(comments[id].deleted || comments[id].parentDeleted ? {}
         : comments[id]
       )
-  })
+  });
 }
 
 function add (token, comment) {
   return new Promise((res) => {
-    let comments = getData(token)
+    let comments = getData(token);
 
     comments[comment.id] = {
       id: comment.id,
@@ -66,11 +65,10 @@ function add (token, comment) {
       voteScore: 1,
       deleted: false,
       parentDeleted: false
-    }
+    };
 
-    posts.incrementCommentCounter(token, comment.parentId, 1)
-    res(comments[comment.id])
-  })
+    res(comments[comment.id]);
+  });
 }
 
 function vote (token, id, option) {
@@ -87,37 +85,44 @@ function vote (token, id, option) {
         default:
             console.log(`comments.vote received incorrect parameter: ${option}`)
     }
-    res(comment)
+    res(comment);
   })
 }
 
 function disableByParent (token, post) {
     return new Promise((res) => {
-        let comments = getData(token)
-        keys = Object.keys(comments)
-        filtered_keys = keys.filter(key => comments[key].parentId === post.id)
-        filtered_keys.forEach(key => comments[key].parentDeleted = true)
-        res(post)
-    })
+        let comments = getData(token);
+        keys = Object.keys(comments);
+        filtered_keys = keys.filter(key => comments[key].parentId === post.id);
+        filtered_keys.forEach(key => comments[key].parentDeleted = true);
+        res(post);
+    });
 }
 
 function disable (token, id) {
     return new Promise((res) => {
-      let comments = getData(token)
-      comments[id].deleted = true
-      posts.incrementCommentCounter(token, comments[id].parentId, -1)
-      res(comments[id])
-    })
+      let comments = getData(token);
+      comments[id].deleted = true;
+      res(comments[id]);
+    });
 }
 
 function edit (token, id, comment) {
     return new Promise((res) => {
-        let comments = getData(token)
+        let comments = getData(token);
         for (prop in comment) {
-            comments[id][prop] = comment[prop]
+            comments[id][prop] = comment[prop];
         }
-        res(comments[id])
+        res(comments[id]);
     })
+}
+function getByParentForPost(token, parentId) {
+  let comments = getData(token);
+  let keys = Object.keys(comments);
+  filtered_keys = keys.filter(
+    key => comments[key].parentId === parentId && !comments[key].deleted
+  );
+  return filtered_keys.map(key => comments[key]);
 }
 
 module.exports = {
@@ -127,5 +132,6 @@ module.exports = {
   vote,
   disableByParent,
   disable,
-  edit
+  edit,
+  getByParentForPost
 }

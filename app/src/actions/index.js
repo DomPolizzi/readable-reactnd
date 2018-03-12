@@ -5,6 +5,7 @@ export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 export const UPDATE_ORDER = 'UPDATE_ORDER';
 export const DELETE_POST = 'DELETE_POST';
+export const UPDATE_POST = 'UPDATE_POST';
 
 export const receive = (type, payload) => ({
   type,
@@ -39,3 +40,8 @@ export const deletePost = post => distpatch =>
       });
     }
   });
+
+export const votePost = (id, option) => dispatch =>
+  Api.votePost(id,option).then(payload =>
+    dispatch(receive(UPDATE_POST, payload))
+);

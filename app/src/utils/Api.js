@@ -92,7 +92,7 @@ export const deletePost = id =>
     headers: {
       ...headers
     }
-  }).then(res => res.json());
+  });
 
 export const deleteComment = id =>
   fetch(`${url}/comments/${id}`, {

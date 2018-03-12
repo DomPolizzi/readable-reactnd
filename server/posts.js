@@ -1,5 +1,5 @@
 const clone = require('clone')
-const config = require('./config');
+const config = require('./comments');
 
 
 let db = {}
@@ -30,31 +30,28 @@ const defaultData = {
 }
 
 function getData (token) {
-  let data = db[token]
+  let data = db[token];
   if (data == null) {
-    data = db[token] = clone(defaultData)
+    data = db[token] = clone(defaultData);
   }
-  return data
+  return data;
 }
 
 function getByCategory (token, category) {
   return new Promise((res) => {
     let posts = getData(token)
     let keys = Object.keys(posts)
-    let filtered_keys = keys.filter(key => posts[key].category === category && !posts[key].deleted)
-    res(filtered_keys.map(key => posts[key]))
-  })
+    let filtered_keys = keys.filter(
+      key => posts[key].category === category && !posts[key].deleted);
+  res(filtered_keys.map(key => posts[key]));
+  });
 }
 
 function get (token, id) {
   return new Promise((res) => {
-    const posts = getData(token)
-    res(
-      posts[id].deleted
-        ? {}
-        : posts[id]
-    )
-  })
+    const posts = getData(token);
+    res(posts[id].deleted ? {} : posts[id]);
+  });
 }
 
 function getAll (token) {
@@ -62,8 +59,13 @@ function getAll (token) {
     const posts = getData(token)
     let keys = Object.keys(posts)
     let filtered_keys = keys.filter(key => !posts[key].deleted)
-    res(filtered_keys.map(key => posts[key]))
-  })
+    const postsRes = filtered_keys.map(key => posts[key]).map(post => {
+        const postComments = comments.getByParentForPost(token, post.id);
+        post.numComments = Array.isArray(postComments) ? postComments.length : 0;
+        return post;
+  });
+    res(postsRes);
+  });
 }
 
 function add (token, post) {
@@ -78,12 +80,11 @@ function add (token, post) {
       author: post.author,
       category: post.category,
       voteScore: 1,
-      deleted: false,
-      commentCount: 0
+      deleted: false
     }
 
-    res(posts[post.id])
-  })
+    res(posts[post.id]);
+  });
 }
 
 function vote (token, id, option) {
@@ -100,33 +101,26 @@ function vote (token, id, option) {
         default:
             console.log(`posts.vote received incorrect parameter: ${option}`)
     }
-    res(post)
-  })
+    res(post);
+  });
 }
 
 function disable (token, id) {
     return new Promise((res) => {
-      let posts = getData(token)
-      posts[id].deleted = true
-      res(posts[id])
-    })
+      let posts = getData(token);
+      posts[id].deleted = true;
+      res(posts[id]);
+    });
 }
 
 function edit (token, id, post) {
     return new Promise((res) => {
-        let posts = getData(token)
+        let posts = getData(token);
         for (prop in post) {
-            posts[id][prop] = post[prop]
+            posts[id][prop] = post[prop];
         }
-        res(posts[id])
-    })
-}
-
-function incrementCommentCounter(token, id, count) {
-  const data = getData(token)
-  if (data[id]) {
-    data[id].commentCount += count
-  }
+        res(posts[id]);
+    });
 }
 
 module.exports = {
@@ -137,6 +131,5 @@ module.exports = {
   vote,
   disable,
   edit,
-  getAll,
-  incrementCommentCounter
+  getAll
 }
