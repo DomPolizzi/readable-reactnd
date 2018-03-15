@@ -17,8 +17,7 @@ const GenericList = ({ items, handleDelete, handleVote }) => {
                 primary={
                   <Link
                     to={`/${item.category}/${item.id}`}
-                    style={{ textDecoration: 'none' }}
-                  >
+                    style={{ textDecoration: 'none' }} >
                     {item.title}
                   </Link>
                 }

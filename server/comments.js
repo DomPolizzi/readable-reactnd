@@ -1,4 +1,4 @@
-const clone = require('clone')
+const clone = require('clone');
 
 let db = {}
 
@@ -23,17 +23,17 @@ const defaultData = {
     deleted: false,
     parentDeleted: false
   }
-}
+};
 
 function getData (token) {
   let data = db[token]
   if (data == null) {
     data = db[token] = clone(defaultData)
   }
-  return data
+  return data;
 }
 
-function getByParent (token, parentId) {
+function getByParent(token, parentId) {
   return new Promise((res) => {
     let comments = getData(token);
     let keys = Object.keys(comments);
@@ -134,4 +134,4 @@ module.exports = {
   disable,
   edit,
   getByParentForPost
-}
+};

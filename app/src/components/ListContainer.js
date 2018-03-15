@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { fetchPosts, fetchCategories, orderBy, deletePost, votePost } from '../actions';
+import { fetchPosts, fetchCategories, orderBy, deletePost, votePost} from '../actions';
 import GenericList from './GenericList';
 import { baseCategory } from '../utils/config';
 import CategoryBar from './CategoryBar';
@@ -41,7 +41,7 @@ class ListContainer extends Component {
                         posts.filter(post => post.category === category.path)
                       )}
                     handleVote={this.handlePostVote}
-                    handldDelete={this.handldDelete}
+                    handleDelete={this.handleDelete}
                     />
                   )}
                 />
