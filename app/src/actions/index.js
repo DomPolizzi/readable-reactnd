@@ -45,3 +45,6 @@ export const votePost = (id, option) => dispatch =>
   Api.votePost(id,option).then(payload =>
     dispatch(receive(UPDATE_POST, payload))
 );
+
+export const getPost = id => dispatch =>
+  Api.getPost(id).then(payload => dispatch(receive(UPDATE_POST, payload)));

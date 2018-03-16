@@ -3,6 +3,7 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import { Edit, DeleteForever } from 'material-ui-icons';
 import VoteScore from './VoteScore';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 const GenericList = ({ items, handleDelete, handleVote }) => {
   return (
@@ -21,7 +22,8 @@ const GenericList = ({ items, handleDelete, handleVote }) => {
                     {item.title}
                   </Link>
                 }
-                secondary={`Author: ${item.author} - Comments: ${item.numComments}`}
+                secondary={`${moment(item.timestamp).format('Do MMM YYYY')
+              } -   Author: ${item.author} - Comments: ${item.numComments}`}
               />
               <Edit />
               <DeleteForever onClick={() => handleDelete(item)} />

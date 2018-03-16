@@ -16,7 +16,7 @@ const CategoryBar = ({ categories, order, handleOrderChange }) => (
         categories.length > 0 &&
         categories.map((category, i) => (
           <Link
-            to={category.path}
+            to={`/${category.path}`}
             key={i}
             style={{ textDecoration: 'none' }}>
             <Button color="contrast">{category.name}</Button>
