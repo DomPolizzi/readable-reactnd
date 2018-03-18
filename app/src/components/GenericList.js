@@ -5,6 +5,29 @@ import VoteScore from './VoteScore';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
+const timeFormat = 'Do MMM YYYY';
+
+const Content = ({ item }) => (
+  <div style={{ paddingLeft: 10 }}>
+    {item.parentId ? (
+      <ListItemText primary={item.body} secondary={`${moment(item.timestamp).format(timeFormat)}
+        - Author: ${item.author}`}
+      />
+    ) : (
+      <ListItemText
+        primary={
+          <Link to={`/${item.category}/${item.id}`} style={{ textDecoration: 'none' }} >
+            {item.title}
+          </Link>
+        }
+        secondary={`${moment(item.timestamp).format(
+          timeFormat
+        )} - Author: ${item.author} - Comments: ${item.numComments}`}
+      />
+    )}
+  </div>
+);
+
 const GenericList = ({ items, handleDelete, handleVote }) => {
   return (
     <List>
@@ -13,20 +36,15 @@ const GenericList = ({ items, handleDelete, handleVote }) => {
         items.map((item, i) => (
           <div key={i}>
             <ListItem divider>
-              <VoteScore item={item} handleVote={handleVote} />
-              <ListItemText
-                primary={
-                  <Link
-                    to={`/${item.category}/${item.id}`}
-                    style={{ textDecoration: 'none' }} >
-                    {item.title}
-                  </Link>
-                }
-                secondary={`${moment(item.timestamp).format('Do MMM YYYY')
-              } -   Author: ${item.author} - Comments: ${item.numComments}`}
-              />
-              <Edit />
-              <DeleteForever onClick={() => handleDelete(item)} />
+              <div style={{ display: 'flex', alignItems: 'center', flex: '1 1 auto' }}>
+                <VoteScore item={item} handleVote={handleVote} />
+                <Content item={item} />
+                <div style={{ flex: '1 1 auto'  }} />
+                <div>
+                  <Edit />
+                  <DeleteForever onClick={() => handleDelete(item)} />
+                </div>
+              </div>
             </ListItem>
           </div>
         ))}

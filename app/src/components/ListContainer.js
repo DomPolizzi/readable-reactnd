@@ -26,20 +26,16 @@ class ListContainer extends Component {
           order={order}
           categories={categories}
           handleOrderChange={this.handleOrderChange}/>
-            {categories &&
+          {categories &&
               categories.length > 0 &&
               categories.map((category, i) => (
                 <Route
                   exact path={`/${category.path}`}
                   key={i}
                   render={() => (
-                    <GenericList
-                      items={
-                        category.path === baseCategory.path ? (
-                        posts
-                      ) : (
-                        posts.filter(post => post.category === category.path)
-                      )}
+              <GenericList items={ category.path === baseCategory.path ? posts
+                       : posts.filter(post => post.category === category.path)
+                      }
                     handleVote={this.handlePostVote}
                     handleDelete={this.handleDelete}
                     />
@@ -49,10 +45,10 @@ class ListContainer extends Component {
             <AddCircle
               style={{
                 position: 'fixed',
-                right: 20,
-                bottom: 20,
-                width: 40,
-                height:40,
+                right: 25,
+                bottom: 25,
+                width: 52,
+                height:52,
                 fill: '#008000'
               }}
             />
@@ -63,7 +59,7 @@ class ListContainer extends Component {
 
     function mapStateToProps({ posts, categories, order }) {
       return {
-        posts: sortBy(order, posts),
+        posts: sortBy(posts, order),
         categories,
         order
       };
@@ -75,4 +71,4 @@ class ListContainer extends Component {
       orderBy,
       deletePost,
       votePost
-})(ListContainer);
+    })(ListContainer);

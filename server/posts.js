@@ -48,6 +48,10 @@ function getByCategory (token, category) {
 function get (token, id) {
   return new Promise(res => {
     const posts = getData(token);
+    const postComments = comments.getByParentForPost(token, posts[id].id);
+posts[id].numComments = Array.isArray(postComments)
+  ? postComments.length
+  : 0;
     res(posts[id].deleted ? {} : posts[id]);
   });
 }

@@ -1,24 +1,24 @@
 import { VOTE_ORDER, TIMESTAMP_ORDER } from '../utils/config';
 
-const sortByVoteScore = posts => {
-  return Array.isArray(posts)
-    ? posts.sort((a, b) => b.voteScore - a.voteScore)
-    : posts;
+const sortByVoteScore = items => {
+  return Array.isArray(items)
+    ? items.sort((a, b) => b.voteScore - a.voteScore)
+    : items;
 };
 
-const sortByTimeStamp = posts => {
-  return Array.isArray(posts)
-    ? posts.sort((a, b) => b.timestamp - a.timestamp)
-    : posts;
+const sortByTimeStamp = items => {
+  return Array.isArray(items)
+    ? items.sort((a, b) => b.timestamp - a.timestamp)
+    : items;
 };
 
-export const sortBy = (order, posts) => {
+export const sortBy = (items, order = VOTE_ORDER) => {
   switch (order) {
     case VOTE_ORDER:
-      return sortByVoteScore(posts);
+      return sortByVoteScore(items);
     case TIMESTAMP_ORDER:
-      return sortByTimeStamp(posts);
+      return sortByTimeStamp(items);
     default:
-      return posts;
+      return items;
   }
 };

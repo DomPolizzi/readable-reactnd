@@ -1,4 +1,4 @@
-import { FETCH_POSTS, DELETE_POST, UPDATE_POST } from '../actions';
+import { FETCH_POSTS, DELETE_POST, UPDATE_POST, DELETE_COMMENT } from '../actions';
 
 export default function(state = [], action) {
   switch (action.type) {
@@ -10,6 +10,16 @@ export default function(state = [], action) {
       return state.map(
         post => (action.payload.id === post.id ? action.payload : post)
       );
+      case DELETE_COMMENT:
+          return state.map(post => {
+            if (action.payload.parentId === post.id) {
+              post.numComments = post.numComments - 1;
+                return post;
+            } else {
+                return post;
+              }
+            });
+
     default:
       return state;
   }

@@ -6,7 +6,10 @@ import VoteScore from './VoteScore';
 import Typography from 'material-ui/Typography';
 import { Edit, DeleteForever } from 'material-ui-icons';
 import moment from 'moment';
-import { getPost, fetchComments, deletePost } from '../actions';
+import { getPost, fetchComments, deletePost, votePost, voteComment, deleteComment } from '../actions';
+import GenericList from './GenericList';
+import { sortBy } from '../utils/sort';
+import CommentForm from './CommentForm';
 
 class PostDetail extends Component {
   state ={
@@ -24,9 +27,15 @@ class PostDetail extends Component {
     this.props.deletePost(post);
     this.setState({ fireRedirect: true });
   };
+  handlePostVote = (post, option) => this.props.votePost(post.id, option);
+
+handleCommentVote = (comment, option) =>
+  this.props.voteComment(comment.id, option);
+
+handleCommentDelete = comment => this.props.deleteComment(comment);
 
   render() {
-    const { post } = this.props;
+    const { post,comments } = this.props;
     const { fireRedirect } = this.state;
     return (
       <div>
@@ -34,7 +43,7 @@ class PostDetail extends Component {
         {post &&(
           <div>
             <Card style={{ padding: 5, margin:5 }}>
-              <div style={{ display: 'flex', alignItems: 'center'}}>
+              <div style={{ display: 'flex', alignItems: 'center', paddingLeft: 16, paddingRight: 16}}>
                 <VoteScore item={post} handleVote={() => {}} />
                 <CardHeader title={post.title} subheader={`Sent ${moment(post.timestamp).format(
                     'Do MMMM YYYY, h:mm a'
@@ -46,24 +55,35 @@ class PostDetail extends Component {
                 </div>
               </div>
               <CardContent>
-                <Typography paragraph>
-                  Lorem Ipsum Gibberish Stufff... look up things look a whale
-                </Typography>
+                <Typography paragraph>{post.body}</Typography>
               </CardContent>
             </Card>
           </div>
           )}
+          {post &&
+            comments && (
+              <div>
+                <Card style={{ padding: 5, margin: 5 }}>
+                  <CardHeader title={`${post.numComments} comments`} />
+                  <GenericList
+                    items={comments}
+                    handleVote={this.handleCommentVote}
+                    handleDelete={this.handleCommentDelete}
+                    />
+              <CommentForm />
+            </Card>
+          </div>
+        )}
       </div>
     );
   }
 }
 
-function mapStateToProps({ posts }, { match }) {
+function mapStateToProps({ posts, comments }, { match }) {
   return {
-    post: posts.filter(post => post.id === match.params.postId)[0]
+    post: posts.filter(post => post.id === match.params.postId)[0],
+    comments: sortBy(comments[match.params.postId])
   };
 }
 
-export default connect(mapStateToProps, { getPost, fetchComments, deletePost })(
-  PostDetail
-);
+export default connect(mapStateToProps, { getPost, fetchComments, deletePost, votePost, voteComment, deleteComment})(PostDetail);
