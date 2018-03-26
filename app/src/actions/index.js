@@ -8,6 +8,7 @@ export const DELETE_POST = 'DELETE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const ADD_COMMENT = 'ADD_COMMENT';
 
 export const receive = (type, payload) => ({
   type,
@@ -61,5 +62,13 @@ export const deleteComment = comment => dispatch =>
     dispatch({
       type: DELETE_COMMENT,
       payload: comment
+    });
+  });
+  
+  export const addComment = comment => dispatch =>
+  Api.addComment(comment).then(res => {
+    dispatch({
+      type: ADD_COMMENT,
+      payload: res
     });
   });

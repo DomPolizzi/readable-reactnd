@@ -1,4 +1,4 @@
-import { FETCH_COMMENTS, UPDATE_COMMENT, DELETE_COMMENT } from '../actions';
+import { FETCH_COMMENTS, UPDATE_COMMENT, DELETE_COMMENT, ADD_COMMENT } from '../actions';
 
 export default function(state = [], action) {
   switch (action.type) {
@@ -24,7 +24,16 @@ export default function(state = [], action) {
           comment => action.payload.id !== comment.id
         )
       };
-      default:
-        return state;
-    }
+
+    case ADD_COMMENT:
+      return {
+        ...state,
+        [action.payload.parentId]: [
+          ...state[action.payload.parentId],
+          action.payload
+        ]
+      };
+    default:
+      return state;
+  }
 }

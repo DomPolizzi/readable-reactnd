@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
+import { v4 } from 'uuid';
 
 class CommentForm extends Component {
   state = {
-    id: null,
-    parentId: null,
-    timestamp: null,
     author: '',
-    body: '',
-    voteScore: 0,
-    deleted: false,
-    parentDeleted: false
+    body: ''
   };
 
   handleChange = name => event => {
@@ -22,8 +17,19 @@ class CommentForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log('Submit!');
+    
+    const { post, addComment } = this.props;
+    const newComment = {
+      id: v4(),
+      parentId: post.id,
+      timestamp: Date.now(),
+      author: this.state.author,
+      body: this.state.body
   };
+
+  addComment(newComment);
+  this.setState({ author: '', body: '' });
+};
 
   render() {
     return (

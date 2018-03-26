@@ -4,6 +4,7 @@ import { Edit, DeleteForever } from 'material-ui-icons';
 import VoteScore from './VoteScore';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import Card from 'material-ui/Card';
 
 const timeFormat = 'Do MMM YYYY';
 
@@ -35,17 +36,20 @@ const GenericList = ({ items, handleDelete, handleVote }) => {
         items.length > 0 &&
         items.map((item, i) => (
           <div key={i}>
-            <ListItem divider>
-              <div style={{ display: 'flex', alignItems: 'center', flex: '1 1 auto' }}>
-                <VoteScore item={item} handleVote={handleVote} />
-                <Content item={item} />
-                <div style={{ flex: '1 1 auto'  }} />
-                <div>
-                  <Edit />
-                  <DeleteForever onClick={() => handleDelete(item)} />
+            <Card style={{ padding: 5, margin: 5 }}>
+              <ListItem>
+                <div style={{ display: 'flex', alignItems: 'center', flex: '1 1 auto' }}>
+                  <VoteScore item={item} handleVote={handleVote} />
+                  <Content item={item} />
+                  <div style={{ flex: '1 1 auto'  }} />
+
+                  <div>
+                    <Edit />
+                    <DeleteForever onClick={() => handleDelete(item)} />
                 </div>
               </div>
             </ListItem>
+          </Card>
           </div>
         ))}
     </List>

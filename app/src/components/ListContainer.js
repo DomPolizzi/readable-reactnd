@@ -6,7 +6,6 @@ import GenericList from './GenericList';
 import { baseCategory } from '../utils/config';
 import CategoryBar from './CategoryBar';
 import { sortBy } from '../utils/sort';
-import { AddCircle } from 'material-ui-icons';
 
 class ListContainer extends Component {
   componentDidMount() {
@@ -25,7 +24,8 @@ class ListContainer extends Component {
         <CategoryBar
           order={order}
           categories={categories}
-          handleOrderChange={this.handleOrderChange}/>
+          handleOrderChange={this.handleOrderChange}
+          />
           {categories &&
               categories.length > 0 &&
               categories.map((category, i) => (
@@ -42,16 +42,6 @@ class ListContainer extends Component {
                   )}
                 />
             ))}
-            <AddCircle
-              style={{
-                position: 'fixed',
-                right: 25,
-                bottom: 25,
-                width: 52,
-                height:52,
-                fill: '#008000'
-              }}
-            />
           </div>
         );
       }
