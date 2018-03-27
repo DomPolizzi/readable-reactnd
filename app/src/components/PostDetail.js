@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Card, { CardHeader, CardContent } from 'material-ui/Card';
 import VoteScore from './VoteScore';
@@ -9,10 +10,23 @@ import { getPost, fetchComments, deletePost, votePost, voteComment, deleteCommen
 import CommentList from './CommentList';
 import { sortBy } from '../utils/sort';
 import CommentForm from './CommentForm';
+import PropTypes from 'prop-types';
 
 class PostDetail extends Component {
+  static propTypes = {
+  post: PropTypes.object,
+  comments: PropTypes.array,
+  getPost: PropTypes.func.isRequired,
+  fetchComments: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
+  votePost: PropTypes.func.isRequired,
+  voteComment: PropTypes.func.isRequired,
+  deleteComment: PropTypes.func.isRequired
+};
+
   state = {
-    editComment: null
+    editComment: null,
+    deleted: false
   };
 
   componentDidMount() {
@@ -23,6 +37,7 @@ class PostDetail extends Component {
 
   handleDelete = post => {
     this.props.deletePost(post);
+    this.setState({ deleted: true });
 };
 
   handlePostVote = (post, option) => this.props.votePost(post.id, option);
@@ -38,7 +53,12 @@ class PostDetail extends Component {
 
   render() {
     const { post, comments } = this.props;
-    const { editComment } = this.state;
+    const { editComment, deleted } = this.state;
+
+    if (deleted) {
+    return <Redirect to={'/'} />;
+  }
+
     return (
       <div>
         {post &&(
@@ -51,7 +71,11 @@ class PostDetail extends Component {
                     'Do MMMM YYYY, h:mm a')} by ${post.author} `}/>
                 <div style={{ flex: '1 1 auto' }} />
                 <div>
-                  <Edit />
+                  <Link
+                  to={`/post/edit/${post.id}`}
+                  style={{ textDecoration: 'none', color: 'black' }} >
+                      <Edit />
+                  </Link>
                   <DeleteForever onClick={() => this.handleDelete(post)}/>
                 </div>
               </div>

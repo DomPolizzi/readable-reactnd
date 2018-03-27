@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
+import { Link } from 'react-router-dom';
 
 const AddPostButton = () => {
   return (
@@ -14,9 +15,11 @@ const AddPostButton = () => {
         fill: '#3f51b5'
       }}
     >
-      <Button fab color="primary">
-        <AddIcon />
-      </Button>
+      <Link to={`/post/new`} style={{ textDecoration: 'none' }}>
+        <Button fab color="primary">
+          <AddIcon />
+        </Button>
+      </Link>
     </div>
   );
 };

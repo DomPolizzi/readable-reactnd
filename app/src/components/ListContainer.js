@@ -6,8 +6,21 @@ import PostList from './PostList';
 import { baseCategory } from '../utils/config';
 import CategoryBar from './CategoryBar';
 import { sortBy } from '../utils/sort';
+import PropTypes from 'prop-types';
+
 
 class ListContainer extends Component {
+  static propTypes = {
+    posts: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
+    order: PropTypes.string,
+    fetchPosts: PropTypes.func.isRequired,
+    fetchCategories: PropTypes.func.isRequired,
+    orderBy: PropTypes.func.isRequired,
+    deletePost: PropTypes.func.isRequired,
+    votePost: PropTypes.func.isRequired
+  };
+
   componentDidMount() {
     this.props.fetchPosts();
     this.props.fetchCategories();

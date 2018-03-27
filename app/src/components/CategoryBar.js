@@ -8,6 +8,7 @@ import Select from 'material-ui/Select';
 import Input from 'material-ui/Input';
 import { MenuItem } from 'material-ui/Menu';
 import { VOTE_ORDER, TIMESTAMP_ORDER } from '../utils/config';
+import PropTypes from 'prop-types';
 
 const CategoryBar = ({ categories, order, handleOrderChange }) => (
   <AppBar position="static">
@@ -35,5 +36,11 @@ const CategoryBar = ({ categories, order, handleOrderChange }) => (
     </Toolbar>
   </AppBar>
 );
+
+CategoryBar.propTypes = {
+  categories: PropTypes.array.isRequired,
+  order: PropTypes.string.isRequired,
+  handleOrderChange: PropTypes.func.isRequired
+};
 
 export default CategoryBar;

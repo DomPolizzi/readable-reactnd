@@ -9,6 +9,7 @@ export const UPDATE_POST = 'UPDATE_POST';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const ADD_POST = 'ADD_POST';
 
 export const receive = (type, payload) => ({
   type,
@@ -77,3 +78,14 @@ export const updateComment = comment => dispatch =>
   Api.editComment(comment).then(payload =>
     dispatch(receive(UPDATE_COMMENT, payload))
   );
+
+export const addPost = post => dispatch =>
+  Api.addPost(post).then(payload => {
+    dispatch({
+      type: ADD_POST,
+      payload
+    });
+  });
+
+export const updatePost = post => dispatch =>
+  Api.editPost(post).then(payload => dispatch(receive(UPDATE_POST, payload)));

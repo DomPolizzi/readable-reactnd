@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import Card from 'material-ui/Card';
 import { timeFormat } from '../utils/config';
+import PropTypes from 'prop-types';
 
 const Content = ({ item }) => (
   <div style={{ paddingLeft: 10 }}>
@@ -49,6 +50,16 @@ const PostList = ({ items, handleDelete, handleVote }) => {
         ))}
     </List>
   );
+};
+
+Content.propTypes = {
+  item: PropTypes.object.isRequired
+};
+
+PostList.propTypes = {
+  items: PropTypes.array.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  handleVote: PropTypes.func.isRequired
 };
 
 export default PostList;

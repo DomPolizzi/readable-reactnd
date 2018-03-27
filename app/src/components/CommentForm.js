@@ -4,8 +4,18 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { v4 } from 'uuid';
 import { addComment, updateComment } from '../actions';
+import PropTypes from 'prop-types';
+
 
 class CommentForm extends Component {
+  static propTypes = {
+  comment: PropTypes.object,
+  post: PropTypes.object,
+  addComment: PropTypes.func,
+  updateComment: PropTypes.func,
+  handleFinishEdit: PropTypes.func
+  };
+  
   state = {
     author: this.props.comment ? this.props.comment.author : '',
     body: this.props.comment ? this.props.comment.body : ''

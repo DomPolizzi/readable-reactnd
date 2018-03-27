@@ -1,15 +1,22 @@
-import { FETCH_POSTS, DELETE_POST, UPDATE_POST, DELETE_COMMENT } from '../actions';
+import { FETCH_POSTS, DELETE_POST, UPDATE_POST, DELETE_COMMENT, ADD_COMMENT, ADD_POST } from '../actions';
 
 export default function(state = [], action) {
   switch (action.type) {
+
+    case ADD_POST:
+          return [...state, action.payload];
+          
     case FETCH_POSTS:
       return [...action.payload];
+
     case DELETE_POST:
       return state.filter(post => post.id !== action.value.id);
+
     case UPDATE_POST:
       return state.map(
         post => (action.payload.id === post.id ? action.payload : post)
       );
+
       case DELETE_COMMENT:
           return state.map(post => {
             if (action.payload.parentId === post.id) {
@@ -19,6 +26,16 @@ export default function(state = [], action) {
                 return post;
               }
             });
+
+      case ADD_COMMENT:
+        return state.map(post => {
+          if (action.payload.parentId === post.id) {
+                post.numComments = post.numComments + 1;
+              return post;
+          } else {
+              return post;
+            }
+    });
 
     default:
       return state;

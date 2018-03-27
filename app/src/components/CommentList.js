@@ -6,6 +6,7 @@ import moment from 'moment';
 import Card from 'material-ui/Card';
 import CommentForm from './CommentForm';
 import { timeFormat } from '../utils/config';
+import PropTypes from 'prop-types';
 
 const Content = ({ item }) => (
   <div style={{ paddingLeft: 10 }}>
@@ -24,7 +25,6 @@ const CommentList = ({
   handleVote,
   editComment,
   handleEditButton,
-  handleUpdateComment,
   handleFinishEdit
 }) => {
   return (
@@ -63,6 +63,19 @@ const CommentList = ({
         ))}
     </List>
   );
+};
+
+Content.propTypes = {
+  item: PropTypes.object.isRequired
+};
+
+CommentList.propTypes = {
+  items: PropTypes.array.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  handleVote: PropTypes.func.isRequired,
+  editComment: PropTypes.bool,
+  handleEditButton: PropTypes.func.isRequired,
+  handleFinishEdit: PropTypes.func.isRequired
 };
 
 export default CommentList;
