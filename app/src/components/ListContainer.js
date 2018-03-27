@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { fetchPosts, fetchCategories, orderBy, deletePost, votePost} from '../actions';
-import GenericList from './GenericList';
+import PostList from './PostList';
 import { baseCategory } from '../utils/config';
 import CategoryBar from './CategoryBar';
 import { sortBy } from '../utils/sort';
@@ -33,7 +33,7 @@ class ListContainer extends Component {
                   exact path={`/${category.path}`}
                   key={i}
                   render={() => (
-              <GenericList items={ category.path === baseCategory.path ? posts
+              <PostList items={ category.path === baseCategory.path ? posts
                        : posts.filter(post => post.category === category.path)
                       }
                     handleVote={this.handlePostVote}

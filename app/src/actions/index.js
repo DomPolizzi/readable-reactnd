@@ -64,7 +64,7 @@ export const deleteComment = comment => dispatch =>
       payload: comment
     });
   });
-  
+
   export const addComment = comment => dispatch =>
   Api.addComment(comment).then(res => {
     dispatch({
@@ -72,3 +72,8 @@ export const deleteComment = comment => dispatch =>
       payload: res
     });
   });
+
+export const updateComment = comment => dispatch =>
+  Api.editComment(comment).then(payload =>
+    dispatch(receive(UPDATE_COMMENT, payload))
+  );
