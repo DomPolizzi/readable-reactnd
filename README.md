@@ -9,28 +9,34 @@ Dependencies:
 * [Node.js](https://nodejs.org/en/)
 
 
-1) You need to install the server...
-      You can do this by:
+1)
+      You need to install the server...
 
-      Moving into the directory
+      Move into the Server directory:
+
         cd server
 
-      Installing all the servers dependencies
+      Install all the servers dependencies:
+
         npm install
 
-      Start the Server
+      Start the Server:
+
         npm start
 
  2)
         You will need to install the app itself..
 
-        You will need to move to directory
+        Move to the Apps main directory:
+
           cd app
 
-        Then you need to install the apps dependencies
+        Install the Apps dependencies:
+        
           npm install
 
-        To run the app, use :
+        Run the App:
+
           npm start
 
 
