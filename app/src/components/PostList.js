@@ -21,7 +21,7 @@ const Content = ({ item }) => (
       }
       secondary={`${moment(item.timestamp).format(
         timeFormat
-      )} - Author: ${item.author} - Comments: ${item.numComments}`}
+      )} - Author: ${item.author} - Comments: ${item.commentCount}`}
     />
   </div>
 );

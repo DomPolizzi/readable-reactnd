@@ -6,7 +6,8 @@ import VoteScore from './VoteScore';
 import Typography from 'material-ui/Typography';
 import { Edit, DeleteForever } from 'material-ui-icons';
 import moment from 'moment';
-import { getPost, fetchComments, deletePost, votePost, voteComment, deleteComment } from '../actions';
+import { getPost, deletePost, votePost, } from '../actions/postsActions';
+import { fetchComments, voteComment, deleteComment } from '../actions/commentsActions';
 import CommentList from './CommentList';
 import { sortBy } from '../utils/sort';
 import CommentForm from './CommentForm';
@@ -92,7 +93,7 @@ class PostDetail extends Component {
                   <CommentForm post={post} />
                 </Card>
                 <Card style={{ padding: 5, margin: 5 }}>
-                  <CardHeader title={`${post.numComments} comments`} />
+                  <CardHeader title={`${post.commentCount} comments`} />
                   <CommentList
                     items={comments}
                     handleVote={this.handleCommentVote}

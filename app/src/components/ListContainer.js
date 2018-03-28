@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { fetchPosts, fetchCategories, orderBy, deletePost, votePost} from '../actions';
+import { fetchPosts, deletePost, votePost } from '../actions/postsActions';
+import { fetchCategories } from '../actions/categoriesActions';
+import { orderBy } from '../actions/orderActions';
 import PostList from './PostList';
 import { baseCategory } from '../utils/config';
 import CategoryBar from './CategoryBar';

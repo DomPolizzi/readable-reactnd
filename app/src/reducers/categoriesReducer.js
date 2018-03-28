@@ -1,4 +1,4 @@
-import { FETCH_CATEGORIES } from '../actions';
+import { FETCH_CATEGORIES } from '../actions/types';
 import { baseCategory } from '../utils/config';
 
 export default function(state = {}, action) {

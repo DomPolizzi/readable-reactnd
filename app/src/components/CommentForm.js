@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { v4 } from 'uuid';
-import { addComment, updateComment } from '../actions';
+import { addComment, updateComment } from '../actions/commentsActions';
 import PropTypes from 'prop-types';
 
 
@@ -15,7 +15,7 @@ class CommentForm extends Component {
   updateComment: PropTypes.func,
   handleFinishEdit: PropTypes.func
   };
-  
+
   state = {
     author: this.props.comment ? this.props.comment.author : '',
     body: this.props.comment ? this.props.comment.body : ''

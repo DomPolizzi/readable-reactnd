@@ -1,4 +1,4 @@
-import { UPDATE_ORDER } from '../actions';
+import { UPDATE_ORDER } from '../actions/types';
 import { defaultOrder } from '../utils/config';
 
 export default function(state = defaultOrder, action) {

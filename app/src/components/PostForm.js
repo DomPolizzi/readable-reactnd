@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { v4 } from 'uuid';
 import { connect } from 'react-redux';
-import { addPost, updatePost } from '../actions';
+import { addPost, updatePost } from '../actions/postsActions';
 import Card from 'material-ui/Card';
 import Select from 'material-ui/Select';
 import Input, { InputLabel } from 'material-ui/Input';

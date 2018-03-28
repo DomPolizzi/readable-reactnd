@@ -31,7 +31,7 @@ export const addPost = post =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ post })
+    body: JSON.stringify(post)
   }).then(res => res.json());
 
 export const votePost = (id, option) =>
@@ -51,7 +51,7 @@ export const addComment = comment =>
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ comment })
+    body: JSON.stringify(comment)
   }).then(res => res.json());
 
 export const voteComment = (id, option) =>
@@ -65,24 +65,24 @@ export const voteComment = (id, option) =>
   }).then(res => res.json());
 
 // Put Methods
-export const editPost = (id, post) =>
-  fetch(`${url}/posts/${id}`, {
+export const editPost = post =>
+  fetch(`${url}/posts/${post.id}`, {
     method: 'PUT',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ post })
+    body: JSON.stringify(post)
   }).then(res => res.json());
 
-export const editComment = (id, comment) =>
-  fetch(`${url}/comments/${id}`, {
+export const editComment = comment =>
+  fetch(`${url}/comments/${comment.id}`, {
     method: 'PUT',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ comment })
+    body: JSON.stringify(comment)
   }).then(res => res.json());
 
 // Delete Methods

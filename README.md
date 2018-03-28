@@ -1,34 +1,45 @@
 ## Udacity 2nd Project Readable
 
+Project for Udacity's  Radable project for React Nanodegree course.
 
 ## How to use
 
-Step 1)
-You need to install the server...
-You can do this by:
+Dependencies:
 
-Moving into the directory
-cd server
-
-Installing all the servers dependencies
-npm install
-
-Starting the node Server
-npm start
+* [Node.js](https://nodejs.org/en/)
 
 
-Step 2)
-You will need to install the app itself..
+1) You need to install the server...
+      You can do this by:
 
-You will need to move to directory
-cd app
+      Moving into the directory
+        cd server
 
-Then you need to install the apps dependencies
-npm install
+      Installing all the servers dependencies
+        npm install
 
-Followed by
-npm start
+      Start the Server
+        npm start
 
-to start the app.
+ 2)
+        You will need to install the app itself..
 
-It should launch automatically in your browser @ http://localhost:3000/
+        You will need to move to directory
+          cd app
+
+        Then you need to install the apps dependencies
+          npm install
+
+        To run the app, use :
+          npm start
+
+
+
+### Running
+
+
+
+It should launch automatically in your browser @
+ [localhost:3000](http://localhost:3000/) and the server at [localhost:3001](http://localhost:3001).
+
+~Dom
